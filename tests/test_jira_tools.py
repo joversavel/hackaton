@@ -19,7 +19,7 @@ def mock_jira_response(data):
 
 def test_get_open_tickets_returns_list():
     fake = {"issues": [{"key": "PROJ-1", "fields": {"summary": "Test", "status": {"name": "Open"}, "assignee": None}}]}
-    with patch("tools.jira_tools.requests.get", return_value=mock_jira_response(fake)):
+    with patch("tools.jira_tools.requests.post", return_value=mock_jira_response(fake)):
         result = get_open_tickets()
     assert isinstance(result, list)
     assert result[0]["id"] == "PROJ-1"
@@ -27,16 +27,16 @@ def test_get_open_tickets_returns_list():
 
 def test_get_open_tickets_marks_unassigned():
     fake = {"issues": [{"key": "PROJ-1", "fields": {"summary": "Test", "status": {"name": "Open"}, "assignee": None}}]}
-    with patch("tools.jira_tools.requests.get", return_value=mock_jira_response(fake)):
+    with patch("tools.jira_tools.requests.post", return_value=mock_jira_response(fake)):
         result = get_open_tickets()
     assert result[0]["assignee"] is None
 
 
 def test_get_resolved_tickets_uses_done_jql():
     fake = {"issues": []}
-    with patch("tools.jira_tools.requests.get", return_value=mock_jira_response(fake)) as mock_get:
+    with patch("tools.jira_tools.requests.post", return_value=mock_jira_response(fake)) as mock_post:
         get_resolved_tickets(project="PROJ")
-    call_params = mock_get.call_args
+    call_params = mock_post.call_args
     assert "status=Done" in str(call_params)
 
 
