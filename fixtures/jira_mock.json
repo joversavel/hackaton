@@ -1,0 +1,21 @@
+{
+  "open_tickets": [
+    {"id": "PROJ-1", "summary": "Login pagina laadt niet op Safari", "status": "Open", "assignee": null, "description": "Gebruiker meldt dat de loginpagina vastloopt op Safari 17.", "created": "2026-04-15"},
+    {"id": "PROJ-2", "summary": "API timeout bij grote exports", "status": "In Progress", "assignee": "jan.peeters", "description": "Export van meer dan 1000 rijen geeft een 504 Gateway Timeout.", "created": "2026-04-16"},
+    {"id": "PROJ-3", "summary": "Email notificaties worden niet verstuurd", "status": "Open", "assignee": null, "description": "Sinds de update van 12 april komen er geen welkomstmails meer aan.", "created": "2026-04-17"},
+    {"id": "PROJ-4", "summary": "Dashboard cijfers kloppen niet", "status": "Open", "assignee": null, "description": "Omzetcijfers in het dashboard wijken af van de database.", "created": "2026-04-18"},
+    {"id": "PROJ-5", "summary": "SSL certificaat verloopt volgende week", "status": "Open", "assignee": null, "description": "Certificaat voor api.sterima.be verloopt op 27 april.", "created": "2026-04-19"}
+  ],
+  "resolved_tickets": [
+    {"id": "PROJ-98", "summary": "Login timeout na 30 seconden", "status": "Done", "assignee": "sophie.claes", "resolution": "Session timeout config verhoogd naar 60 min. Getest en gedeployed.", "resolved_at": "2026-03-10", "resolution_time_hours": 3},
+    {"id": "PROJ-97", "summary": "API 500 error bij null payload", "status": "Done", "assignee": "jan.peeters", "resolution": "Null check toegevoegd in request validator.", "resolved_at": "2026-03-08", "resolution_time_hours": 1.5},
+    {"id": "PROJ-96", "summary": "Email template gebroken na update", "status": "Done", "assignee": "marie.dubois", "resolution": "Template variabelen aangepast na SMTP library upgrade.", "resolved_at": "2026-02-28", "resolution_time_hours": 2},
+    {"id": "PROJ-95", "summary": "Dashboard laadt niet op Firefox", "status": "Done", "assignee": "sophie.claes", "resolution": "CSS grid fallback toegevoegd voor Firefox 115.", "resolved_at": "2026-02-20", "resolution_time_hours": 4},
+    {"id": "PROJ-94", "summary": "Export timeout bij 500+ rijen", "status": "Done", "assignee": "jan.peeters", "resolution": "Paginering toegevoegd, max 500 rijen per request.", "resolved_at": "2026-02-15", "resolution_time_hours": 5}
+  ],
+  "team_members": [
+    {"name": "Jan Peeters", "account_id": "jan.peeters", "specialties": ["API", "backend", "exports"], "avg_resolution_hours": 2.5},
+    {"name": "Sophie Claes", "account_id": "sophie.claes", "specialties": ["frontend", "login", "CSS"], "avg_resolution_hours": 3.5},
+    {"name": "Marie Dubois", "account_id": "marie.dubois", "specialties": ["email", "notifications", "templates"], "avg_resolution_hours": 2.0}
+  ]
+}
