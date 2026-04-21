@@ -85,7 +85,7 @@ async function handleConfirm(actionId, confirmed) {
   }
 }
 
-function showDepartmentPicker(departments, suggestedSlug, vraagTekst) {
+function showDepartmentPicker(departments, suggestedSlug) {
   const div = document.createElement('div');
   div.className = 'message assistant';
   div.id = 'dept-picker';
@@ -98,12 +98,11 @@ function showDepartmentPicker(departments, suggestedSlug, vraagTekst) {
     return;
   }
 
-  const tekst = vraagTekst || 'Voor welke afdeling wil je een ticket aanmaken?';
   const chips = departments.map(d =>
     `<button class="dept-chip${d.slug === suggestedSlug ? ' active' : ''}" onclick="selectDepartment('${d.slug}')">${d.name}</button>`
   ).join('');
 
-  div.innerHTML = `<span>${tekst}</span><div class="dept-chips">${chips}</div>`;
+  div.innerHTML = `<span>Voor welke afdeling wil je een ticket aanmaken?</span><div class="dept-chips">${chips}</div>`;
   chatContainer.appendChild(div);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
@@ -113,13 +112,9 @@ async function startWizard(suggestedSlug) {
   sendBtn.disabled = true;
   wizardState = { active: true, department: null, questions: [], answers: [], currentStep: 0 };
   try {
-    const [deptResp, selectieResp] = await Promise.all([
-      fetch('/api/departments'),
-      fetch('/api/selectie')
-    ]);
-    const departments = await deptResp.json();
-    const selectieTekst = selectieResp.ok ? await selectieResp.text() : 'Voor welke afdeling wil je een ticket aanmaken?';
-    showDepartmentPicker(departments, suggestedSlug || null, selectieTekst.trim());
+    const resp = await fetch('/api/departments');
+    const departments = await resp.json();
+    showDepartmentPicker(departments, suggestedSlug || null);
   } catch (e) {
     addMessage('Fout bij laden van afdelingen: ' + e.message, 'assistant');
     wizardState.active = false;

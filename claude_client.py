@@ -18,6 +18,10 @@ def _load_algemene_regels() -> str:
     path = Path(__file__).parent / "docs" / "algemene_regels.md"
     return path.read_text(encoding="utf-8").strip() if path.exists() else ""
 
+def _load_selectie() -> str:
+    path = Path(__file__).parent / "docs" / "selectie.md"
+    return path.read_text(encoding="utf-8").strip() if path.exists() else ""
+
 TICKET_FLOW = _load_ticket_flow()
 
 TICKET_CREATION_INSTRUCTION = """
@@ -116,6 +120,13 @@ class ClaudeClient:
             system.append({
                 "type": "text",
                 "text": "--- ALGEMENE REGELS (altijd volgen) ---\n" + algemene_regels,
+                "cache_control": {"type": "ephemeral"}
+            })
+        selectie = _load_selectie()
+        if selectie:
+            system.append({
+                "type": "text",
+                "text": "--- TICKET SELECTIE RICHTLIJNEN ---\n" + selectie,
                 "cache_control": {"type": "ephemeral"}
             })
         if ticket_flow:
