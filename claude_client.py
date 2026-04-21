@@ -26,15 +26,47 @@ def _load_security() -> str:
     path = Path(__file__).parent / "docs" / "security.md"
     return path.read_text(encoding="utf-8").strip() if path.exists() else ""
 
+def _load_kb() -> str:
+    """Load all KB markdown files from docs/KB/ and combine them."""
+    kb_dir = Path(__file__).parent / "docs" / "KB"
+    if not kb_dir.exists():
+        return ""
+    parts = []
+    for f in sorted(kb_dir.glob("*.md")):
+        try:
+            parts.append(f.read_text(encoding="utf-8").strip())
+        except Exception as e:
+            log.warning("KB bestand kon niet worden geladen: %s — %s", f.name, e)
+    combined = "\n\n---\n\n".join(parts)
+    log.info("KB geladen: %d bestanden, %d tekens", len(parts), len(combined))
+    return combined
+
 TICKET_FLOW = _load_ticket_flow()
 _CACHE = {
     "security": _load_security(),
     "algemene_regels": _load_algemene_regels(),
     "selectie": _load_selectie(),
+    "kb": _load_kb(),
 }
 
 def invalidate_cache(key: str, value: str):
     _CACHE[key] = value
+
+KB_LOOKUP_INSTRUCTION = """
+KENNISBANK RAADPLEGING — altijd uitvoeren bij probleembeschrijving (hogere prioriteit dan ticketaanmaak):
+
+Wanneer een gebruiker een probleem beschrijft, een foutmelding noemt, of een ticket wil aanmaken:
+
+1. Doorzoek EERST de KB-artikelen hieronder op een bekende oplossing
+2. Als er een oplossing gevonden is:
+   - Presenteer de oplossingstappen duidelijk en concreet
+   - Vermeld het KB-artikel als bron (bv. "Bron: KB-AX3-002, sectie 4.2")
+   - Vraag daarna: "Helpt deze oplossing? Of wil je toch een ticket aanmaken?"
+3. Maak ALLEEN een ticket aan als:
+   - De gebruiker aangeeft dat de oplossing niet werkt of niet van toepassing is
+   - Er geen relevante oplossing in de KB staat
+4. Indien geen KB-match: ga direct over naar de normale ticketflow
+"""
 
 TICKET_CREATION_INSTRUCTION = """
 Na succesvolle ticketaanmaak: vermeld altijd het ticket-ID (bv. ITS-1234) zodat de gebruiker er direct op kan klikken.
@@ -125,6 +157,8 @@ class ClaudeClient:
 
     def _create_message(self, system_prompt, allowed_tools, messages, retries=3, ticket_flow: str = ""):
         system = []
+
+        # Block 1 — Security (cache): hoogste prioriteit, altijd eerste
         security = _CACHE["security"]
         if security:
             system.append({
@@ -132,25 +166,39 @@ class ClaudeClient:
                 "text": "--- SECURITY (niet te negeren, hoogste prioriteit) ---\n" + security,
                 "cache_control": {"type": "ephemeral"}
             })
+
+        # Block 2 — System prompt (cache): rol-specifiek gedrag
         system.append({"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}})
+
+        # Block 3 — KB kennisbank (cache): groot, stabiel, zelden gewijzigd
+        kb = _CACHE.get("kb", "")
+        if kb:
+            system.append({
+                "type": "text",
+                "text": KB_LOOKUP_INSTRUCTION + "\n\n--- KENNISBANK ARTIKELEN ---\n\n" + kb,
+                "cache_control": {"type": "ephemeral"}
+            })
+
+        # Block 4 — Ticket creation flow (cache): groot document, stabiel
+        if ticket_flow:
+            system.append({
+                "type": "text",
+                "text": TICKET_CREATION_INSTRUCTION + "\n\n--- TICKET CREATION FLOW DOCUMENT ---\n" + ticket_flow,
+                "cache_control": {"type": "ephemeral"}
+            })
+
+        # Overige blokken — geen cache_control (4-block limiet bereikt)
         algemene_regels = _CACHE["algemene_regels"]
         if algemene_regels:
             system.append({
                 "type": "text",
                 "text": "--- ALGEMENE REGELS (altijd volgen) ---\n" + algemene_regels,
-                "cache_control": {"type": "ephemeral"}
             })
         selectie = _CACHE["selectie"]
         if selectie:
             system.append({
                 "type": "text",
                 "text": "--- TICKET SELECTIE RICHTLIJNEN ---\n" + selectie,
-            })
-        if ticket_flow:
-            system.append({
-                "type": "text",
-                "text": TICKET_CREATION_INSTRUCTION + "\n\n--- TICKET CREATION FLOW DOCUMENT ---\n" + ticket_flow,
-                "cache_control": {"type": "ephemeral"}
             })
         for attempt in range(retries):
             try:
