@@ -11,6 +11,29 @@ TOOLS = [
         }
     },
     {
+        "name": "get_ticket",
+        "description": "Haal de volledige details op van één specifiek Jira ticket: beschrijving, status, commentaren, prioriteit.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "ticket_id": {"type": "string", "description": "Jira ticket ID, bijv. ITS-19529"}
+            },
+            "required": ["ticket_id"]
+        }
+    },
+    {
+        "name": "get_my_tickets",
+        "description": "Haal tickets op die toegewezen zijn aan of aangemaakt door de ingelogde gebruiker.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "email": {"type": "string", "description": "E-mailadres van de ingelogde gebruiker"},
+                "project": {"type": "string", "description": "Optionele Jira project key"}
+            },
+            "required": ["email"]
+        }
+    },
+    {
         "name": "get_resolved_tickets",
         "description": "Haal opgeloste Jira tickets op voor historiekanalyse. Gebruikt JQL status=Done.",
         "input_schema": {
@@ -31,6 +54,7 @@ TOOLS = [
                 "summary": {"type": "string", "description": "Titel van het ticket"},
                 "description": {"type": "string", "description": "Uitgebreide beschrijving"},
                 "project": {"type": "string", "description": "Jira project key"},
+                "request_type": {"type": "string", "description": "Aanvraag type: 'Infrastructure/hardware problem', 'Application problem', 'Request new hardware', 'Request access', 'Security/Phished/Mimecast Issue', 'AI questions', 'Domain transfer', 'New employee', 'Leaving user form', 'Request Smartphone', 'WMS or Dynaman problem', 'Request a change'"},
                 "requires_confirmation": {"type": "boolean", "description": "Moet true zijn"}
             },
             "required": ["summary", "project"]
