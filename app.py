@@ -52,7 +52,13 @@ def index():
 
 @app.route("/login")
 def login():
-    return render_template("login.html", all_users=get_all_users())
+    user = get_current_user()
+    session.permanent = False
+    session["user"] = user
+    _set_messages([])
+    _set_pending(None)
+    session.modified = True
+    return redirect(url_for("index"))
 
 
 @app.route("/do-login", methods=["POST"])

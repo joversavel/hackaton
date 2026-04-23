@@ -5,82 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Helpdesk AI — Aanmelden</title>
   <link rel="icon" type="image/svg+xml" href="/static/logo.svg">
-  <script>
-    (function () {
-      const t = localStorage.getItem('theme');
-      if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
-    })();
-  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
+    /* ── POLLET GROUP IT BRAND KIT ── */
     :root {
-      --bg-base:         #0f1117;
-      --bg-surface:      #161b27;
-      --bg-surface-2:    #1e2535;
-      --bg-surface-3:    #1a2030;
-      --border:          #1e2535;
-      --border-2:        #2d3748;
-      --text-primary:    #f1f5f9;
-      --text-secondary:  #e2e8f0;
-      --text-muted:      #cbd5e1;
-      --text-subtle:     #94a3b8;
-      --text-faint:      #64748b;
-      --shadow-modal:    0 20px 60px rgba(0,0,0,0.5);
-    }
-
-    [data-theme="light"] {
-      --bg-base:         #f1f5f9;
-      --bg-surface:      #ffffff;
-      --bg-surface-2:    #f1f5f9;
-      --bg-surface-3:    #e8edf5;
-      --border:          #e2e8f0;
-      --border-2:        #cbd5e1;
-      --text-primary:    #0f172a;
-      --text-secondary:  #1e293b;
-      --text-muted:      #334155;
-      --text-subtle:     #475569;
-      --text-faint:      #94a3b8;
-      --shadow-modal:    0 20px 60px rgba(0,0,0,0.12);
+      --navy:     #14468C;
+      --navydark: #0e3268;
+      --bg:       #eef2f8;
+      --card:     #ffffff;
+      --border:   #dde3ed;
+      --border-2: #c5d5e9;
+      --text:     #0f1f35;
+      --muted:    #5a6e87;
+      --orange:   #d97706;
+      --shadow:   0 8px 32px rgba(20,70,140,0.14);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-base);
-      color: var(--text-secondary);
+      font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    .card {
-      background: var(--bg-surface);
+    /* ── LOGIN CARD ── */
+    .login-card {
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      width: 420px;
+      border-radius: 18px;
+      width: 440px;
       max-width: 95vw;
-      box-shadow: var(--shadow-modal);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .logo {
+    .card-header {
+      background: var(--navy);
+      padding: 1.25rem 1.75rem;
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 28px;
+      gap: .75rem;
     }
 
-    .logo img { width: 48px; height: 48px; border-radius: 10px; }
-    .logo h1 { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); }
+    .card-header svg { height: 34px; width: auto; flex-shrink: 0; }
 
-    h2 { font-size: 0.95rem; color: var(--text-subtle); margin-bottom: 18px; font-weight: 400; }
+    .card-header-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,.25);
+      margin: 0 .3rem;
+    }
+
+    .card-header-title {
+      color: rgba(255,255,255,.9);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .card-body {
+      padding: 1.75rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .card-sub {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
 
     .user-list {
-      display: flex; flex-direction: column; gap: 6px; max-height: 380px; overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 400px;
+      overflow-y: auto;
     }
+
     .user-list::-webkit-scrollbar { width: 4px; }
     .user-list::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
 
@@ -88,60 +99,77 @@
       text-align: left;
       padding: 12px 16px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      background: var(--bg-base);
+      background: #f8fafd;
       font-family: inherit;
       width: 100%;
       transition: all 0.15s;
     }
-    .user-btn:hover { background: var(--bg-surface-3); border-color: #6366f1; }
-    .user-btn strong { font-size: 0.9rem; color: var(--text-secondary); display: block; }
-    .user-meta { font-size: 0.76rem; color: var(--text-faint); margin-top: 3px; }
+    .user-btn:hover {
+      background: #e4ecf7;
+      border-color: var(--navy);
+    }
+    .user-btn strong {
+      font-size: 0.9rem;
+      color: var(--text);
+      display: block;
+      font-weight: 600;
+    }
+    .user-meta {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     .role-dot {
       display: inline-block;
-      width: 7px; height: 7px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      margin-right: 5px;
+      flex-shrink: 0;
     }
-    .role-dot.admin   { background: #818cf8; }
-    .role-dot.beperkt { background: #fb923c; }
-
-    .theme-toggle-btn {
-      position: fixed;
-      top: 16px; right: 16px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-2);
-      color: var(--text-subtle);
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-    }
-    .theme-toggle-btn:hover { background: var(--bg-surface-3); color: var(--text-muted); }
+    .role-dot.admin   { background: var(--navy); }
+    .role-dot.beperkt { background: var(--orange); }
   </style>
 </head>
 <body>
-  <button class="theme-toggle-btn" onclick="toggleTheme()" title="Schakel thema"></button>
-
-  <div class="card">
-    <div class="logo">
-      <img src="/static/logo.svg" alt="Helpdesk AI">
-      <h1>Helpdesk AI</h1>
+  <div class="login-card">
+    <div class="card-header">
+      <svg viewBox="3480 1145 2790 265" xmlns="http://www.w3.org/2000/svg" aria-label="Pollet Group">
+        <style>.st0{fill:#FFFFFF;}</style>
+        <path class="st0" d="M4493.59,1331.69c0,0,13.66-15.18,15.78-20.33c-0.78-0.34-1.64-0.68-2.46-0.94c-35.99-12.92-102.68,14.02-106.32,18.22c5.01-11.56,37.23-46.68,42.62-52.81c-0.18-0.02-0.36-0.04-0.54-0.06c-0.56-0.06-1.1-0.1-1.72-0.16c-0.06-0.02-0.1-0.02-0.16-0.02c-46.92-3.32-165.26,50.67-154.79,45.46c9.61-16.8,64.61-66.03,67.57-71.66c-0.22-0.08-0.92-0.2-1.78-0.3c-1.38-0.18-2.76-0.4-4.15-0.56h-0.1c-104.86-12.16-210.48,85.65-202.61,75.18c16.48-28.2,91.06-100.03,99.07-109.05c-0.2-0.02-0.38-0.04-0.6-0.06c-110.89-12.08-230.47,78.5-242.16,87.74c22.79-70.71,194.08-165.34,200.07-170.23c-0.1-0.02-0.28-0.02-0.48-0.02c-372.62,7.95-447.14,212.92-447.14,212.92c132.94-152.54,350.17-173.29,361.6-175.47c-80.57,40.93-153.97,148.84-156.65,174.55c-1.38,13.36,6.89,12.38,12.94,8.25c0.28-0.2,7.21-5.89,10.13-8.25h-0.02c0.16-0.14,0.3-0.24,0.44-0.38c0.52-0.4,0.86-0.68,0.86-0.68v0.02c112.15-91.28,211.62-100.96,211.62-100.96s-23.93,23.09-41.7,41.7c-17.72,18.62-45.24,63-37.25,72.76c3.32,4.03,10.59,2.3,17.68-1.02c2.74-1.42,19.69-13.38,19.69-13.38h0.02c118.48-82.97,159.55-67.21,154.27-67.21l-44.36,47.92c0,0-13.32,20.37-7.99,26.56c2.12,2.48,6.91,2.28,11.6,1.2c1.46-0.38,4.97-1.62,12.9-5.45c1.26-0.58,2.48-1.2,3.72-1.78c0.1-0.04,0.2-0.08,0.3-0.14c64.09-30.8,116.96-41.72,116.96-41.72s-26.76,21.31-29.26,40.85c-3.16,24.57,19.51,11.5,19.51,11.5c26.92-20.21,65.19-20.83,72.84-21.61c-7.81,6.31-3.67,29.58-3.67,29.58s44.4-14.2,60.38-19.47c15.94-5.35,10.61,10.61,31.88,18.6c21.29,7.99,29.28-21.29,29.28-21.29C4560.14,1299.75,4493.59,1331.69,4493.59,1331.69"/>
+        <path class="st0" d="M4696.54,1169.5h69.9c34.95,0,60.15,23.57,60.15,59.88c0,36.31-25.2,60.69-60.15,60.69h-43.08v70.71h-26.82V1169.5z M4762.11,1266.77c23.03,0,37.12-14.36,37.12-37.39c0-23.03-14.09-36.58-36.85-36.58h-39.02v73.97H4762.11z"/>
+        <path class="st0" d="M4920.31,1220.44c40.91,0,73.96,30.08,73.96,71.53c0,41.73-33.06,72.07-73.96,72.07c-40.91,0-73.97-30.35-73.97-72.07C4846.34,1250.51,4879.4,1220.44,4920.31,1220.44z M4920.31,1341.28c26.01,0,47.14-20.59,47.14-49.31c0-28.45-21.13-48.77-47.14-48.77c-25.74,0-47.14,20.32-47.14,48.77C4873.17,1320.69,4894.57,1341.28,4920.31,1341.28z"/>
+        <path class="st0" d="M5024.6,1169.5h26.28v149.28c0,16.53,6.5,19.51,14.63,19.51c2.44,0,4.6-0.27,4.6-0.27v23.3c0,0-4.07,0.54-8.67,0.54c-14.9,0-36.85-4.07-36.85-38.47V1169.5z"/>
+        <path class="st0" d="M5097.2,1169.5h26.28v149.28c0,16.53,6.5,19.51,14.63,19.51c2.44,0,4.6-0.27,4.6-0.27v23.3c0,0-4.07,0.54-8.67,0.54c-14.9,0-36.85-4.07-36.85-38.47V1169.5z"/>
+        <path class="st0" d="M5230.5,1220.44c38.74,0,59.33,28.72,59.33,64.21c0,3.52-0.81,11.38-0.81,11.38h-99.98c1.35,30.07,22.76,45.24,47.14,45.24c23.57,0,40.64-15.98,40.64-15.98l10.84,19.24c0,0-20.32,19.51-53.11,19.51c-43.08,0-72.61-31.16-72.61-71.8C5161.95,1248.62,5191.48,1220.44,5230.5,1220.44z M5263.01,1276.25c-0.82-23.57-15.45-34.95-33.06-34.95c-20.05,0-36.3,12.46-40.1,34.95H5263.01z"/>
+        <path class="st0" d="M5328.29,1246.72h-17.88v-21.13h18.7v-39.56h25.47v39.56h33.06v21.13h-33.06v60.96c0,27.37,19.24,30.89,29.26,30.89c3.79,0,6.23-0.54,6.23-0.54v23.3c0,0-3.79,0.54-9.21,0.54c-17.61,0-52.56-5.42-52.56-51.21V1246.72z"/>
+        <path class="st0" d="M5581.05,1166.25c45.79,0,69.63,23.03,69.63,23.03l-13.55,20.05c0,0-21.4-18.7-53.91-18.7c-44.98,0-72.07,32.78-72.07,73.7c0,44.43,30.35,75.05,70.44,75.05c33.06,0,54.19-23.84,54.19-23.84v-27.64h-31.16v-23.3h55.54v96.18h-23.57v-11.92c0-4.07,0.27-8.13,0.27-8.13h-0.54c0,0-20.86,23.3-58.79,23.3c-51.48,0-94.02-40.64-94.02-99.16C5483.51,1209.6,5525.23,1166.25,5581.05,1166.25z"/>
+        <path class="st0" d="M5697.53,1223.69h25.47v23.84c0,5.69-0.54,10.29-0.54,10.29h0.54c6.23-20.05,22.22-35.76,43.35-35.76c3.52,0,6.78,0.54,6.78,0.54v26.01c0,0-3.52-0.81-7.59-0.81c-16.8,0-32.24,11.92-38.47,32.24c-2.44,7.86-3.25,16.25-3.25,24.65v56.08h-26.28V1223.69z"/>
+        <path class="st0" d="M5863.05,1220.44c40.91,0,73.96,30.08,73.96,71.53c0,41.73-33.05,72.07-73.96,72.07s-73.96-30.35-73.96-72.07C5789.09,1250.51,5822.14,1220.44,5863.05,1220.44z M5863.05,1341.28c26.01,0,47.14-20.59,47.14-49.31c0-28.45-21.13-48.77-47.14-48.77c-25.74,0-47.14,20.32-47.14,48.77C5815.91,1320.69,5837.31,1341.28,5863.05,1341.28z"/>
+        <path class="st0" d="M5967.07,1223.69h26.28v81.82c0,18.96,3.79,34.14,25.74,34.14c27.91,0,44.43-24.65,44.43-51.75v-64.21h26.28v137.09h-25.47v-18.15c0-5.69,0.54-10.03,0.54-10.03h-0.54c-5.69,13.55-23.57,31.43-50.4,31.43c-30.89,0-46.87-16.26-46.87-52.56V1223.69z"/>
+        <path class="st0" d="M6131.78,1223.69h24.12v11.65c0,5.42-0.54,10.03-0.54,10.03h0.54c0,0,11.65-24.93,46.06-24.93c36.85,0,60.15,29.26,60.15,71.8c0,43.62-26.28,71.8-62.05,71.8c-30.08,0-41.99-22.49-41.99-22.49h-0.54c0,0,0.54,4.87,0.54,11.92v61.5h-26.28V1223.69z M6195.99,1341.55c21.67,0,39.56-17.88,39.56-49.04c0-29.8-15.98-49.04-38.75-49.04c-20.59,0-39.55,14.36-39.55,49.31C6157.25,1317.16,6170.79,1341.55,6195.99,1341.55z"/>
+      </svg>
+      <div class="card-header-divider"></div>
+      <span class="card-header-title">Helpdesk AI</span>
     </div>
-    <h2>Wie ben jij?</h2>
-    <div class="user-list">
-      {% for u in all_users %}
-      <button class="user-btn" onclick="login('{{ u.email }}')">
-        <strong>{{ u.display_name }}</strong>
-        <div class="user-meta">
-          <span class="role-dot {{ u.role }}"></span>
-          {{ u.email }}
-        </div>
-      </button>
-      {% endfor %}
+    <div class="card-body">
+      <h2>Aanmelden</h2>
+      <p class="card-sub">Selecteer uw account om door te gaan.</p>
+      <div class="user-list">
+        {% for u in all_users %}
+        <button class="user-btn" onclick="login('{{ u.email }}')">
+          <strong>{{ u.display_name }}</strong>
+          <div class="user-meta">
+            <span class="role-dot {{ u.role }}"></span>
+            {{ u.email }}
+          </div>
+        </button>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -154,6 +182,5 @@
       }).then(r => r.json()).then(d => { if (d.ok) location.href = '/'; });
     }
   </script>
-  <script src="/static/theme.js"></script>
 </body>
 </html>

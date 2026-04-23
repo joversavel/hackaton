@@ -1,23 +1,24 @@
 // Apply saved theme before paint (called inline from <head>)
 (function () {
   const t = localStorage.getItem('theme');
-  if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
 })();
 
 function toggleTheme() {
   const html = document.documentElement;
-  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  if (next === 'dark') {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
     html.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
   } else {
-    html.setAttribute('data-theme', next);
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
   }
-  localStorage.setItem('theme', next);
   _updateThemeIcons();
 }
 
 function _updateThemeIcons() {
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
     btn.title = isDark ? 'Schakel naar lichtmodus' : 'Schakel naar donkermodus';
     btn.innerHTML = isDark ? _sunIcon() : _moonIcon();

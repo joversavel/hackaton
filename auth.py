@@ -51,6 +51,13 @@ def get_all_users() -> list[dict]:
 
 def get_current_user() -> dict:
     nt_user = _nt_username()
+    if not nt_user:
+        return {
+            "display_name": "Anoniem",
+            "email": "anoniem@sterima.be",
+            "locatie": "",
+            "role": "beperkt",
+        }
     authorized = _load_authorized_users()
     match = next((u for u in authorized if u["email"].split("@")[0] == nt_user), None)
     if match:

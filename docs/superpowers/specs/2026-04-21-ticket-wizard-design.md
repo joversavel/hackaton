@@ -1,6 +1,6 @@
 # Ticket Creation Wizard per Department — Design Spec
 **Date:** 2026-04-21
-**Project:** Pollet AI — Sterima/Pollet Hackathon
+**Project:** Helpdesk AI — Sterima/Pollet Hackathon
 
 ---
 

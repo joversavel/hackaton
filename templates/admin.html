@@ -3,50 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Helpdesk — Admin</title>
+  <title>Helpdesk — Admin — Pollet Group IT</title>
   <script>
     (function () {
       const t = localStorage.getItem('theme');
-      if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
     })();
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
+    /* ── POLLET GROUP IT BRAND KIT ── */
     :root {
-      --bg-base:         #0f1117;
-      --bg-surface:      #161b27;
-      --bg-surface-2:    #1e2535;
-      --bg-surface-3:    #1a2030;
-      --bg-surface-hover:#252f40;
-      --border:          #1e2535;
-      --border-2:        #2d3748;
-      --text-primary:    #f1f5f9;
-      --text-secondary:  #e2e8f0;
-      --text-muted:      #cbd5e1;
-      --text-subtle:     #94a3b8;
-      --text-faint:      #64748b;
+      --navy:              #14468C;
+      --navydark:          #0e3268;
+      --bg-base:           #eef2f8;
+      --bg-surface:        #ffffff;
+      --bg-surface-2:      #f5f7fb;
+      --bg-surface-3:      #eef2f8;
+      --bg-surface-hover:  #dde3ed;
+      --border:            #dde3ed;
+      --border-2:          #c5d5e9;
+      --text-primary:      #0f1f35;
+      --text-secondary:    #1a2e47;
+      --text-muted:        #334155;
+      --text-subtle:       #5a6e87;
+      --text-faint:        #7a8fa8;
+      --green:             #16a34a;
+      --orange:            #d97706;
+      --red:               #dc2626;
     }
 
-    [data-theme="light"] {
-      --bg-base:         #f1f5f9;
-      --bg-surface:      #ffffff;
-      --bg-surface-2:    #f1f5f9;
-      --bg-surface-3:    #e8edf5;
-      --bg-surface-hover:#e2e8f0;
-      --border:          #e2e8f0;
-      --border-2:        #cbd5e1;
-      --text-primary:    #0f172a;
-      --text-secondary:  #1e293b;
-      --text-muted:      #334155;
-      --text-subtle:     #475569;
-      --text-faint:      #94a3b8;
+    [data-theme="dark"] {
+      --bg-base:           #0f1117;
+      --bg-surface:        #161b27;
+      --bg-surface-2:      #1e2535;
+      --bg-surface-3:      #1a2030;
+      --bg-surface-hover:  #252f40;
+      --border:            #1e2535;
+      --border-2:          #2d3748;
+      --text-primary:      #f1f5f9;
+      --text-secondary:    #e2e8f0;
+      --text-muted:        #cbd5e1;
+      --text-subtle:       #94a3b8;
+      --text-faint:        #64748b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Segoe UI', system-ui, Arial, sans-serif;
       background: var(--bg-base);
       min-height: 100vh;
       color: var(--text-secondary);
@@ -54,58 +58,38 @@
       flex-direction: column;
     }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--bg-surface);
-      border-bottom: 1px solid var(--border);
-      padding: 0 28px;
-      height: 60px;
+    /* ── TOPBAR (Pollet brand) ── */
+    .topbar {
+      background: var(--navy);
+      padding: .75rem 1.75rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
     }
+    .topbar-logo { display: flex; align-items: center; gap: .75rem; }
+    .topbar-logo svg { height: 36px; width: auto; }
+    .topbar-divider { width: 1px; height: 26px; background: rgba(255,255,255,.25); margin: 0 .4rem; }
+    .topbar-title { color: rgba(255,255,255,.9); font-size: .92rem; font-weight: 600; letter-spacing: .01em; }
+    .topbar-sub { color: rgba(255,255,255,.55); font-size: .78rem; font-weight: 400; margin-left: 4px; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 32px; height: 32px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border-radius: 8px;
+    .user-avatar {
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,.2);
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; color: white;
+      font-size: 0.75rem; font-weight: 700; color: white;
+      flex-shrink: 0;
     }
+    .user-name { color: rgba(255,255,255,.9); font-weight: 500; font-size: 0.82rem; }
 
-    .logo h1 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .logo-sub {
-      font-size: 0.78rem;
-      color: #6366f1;
-      font-weight: 500;
-      margin-left: 2px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .back-btn {
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border-2);
-      color: var(--text-subtle);
+    .topbar-btn {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
       padding: 5px 14px;
-      border-radius: 8px;
+      border-radius: 7px;
       cursor: pointer;
       font-size: 0.78rem;
       font-family: inherit;
@@ -116,31 +100,20 @@
       align-items: center;
       gap: 6px;
     }
-    .back-btn:hover { background: var(--bg-surface-hover); color: var(--text-muted); }
-
-    .user-avatar {
-      width: 30px; height: 30px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 600; color: white;
-      flex-shrink: 0;
-    }
-
-    .user-name { color: var(--text-muted); font-weight: 500; font-size: 0.82rem; }
+    .topbar-btn:hover { background: rgba(255,255,255,.22); color: #fff; }
 
     .theme-toggle-btn {
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border-2);
-      color: var(--text-subtle);
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.85);
       width: 32px; height: 32px;
-      border-radius: 8px;
+      border-radius: 7px;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
       flex-shrink: 0;
     }
-    .theme-toggle-btn:hover { background: var(--bg-surface-hover); color: var(--text-muted); }
+    .theme-toggle-btn:hover { background: rgba(255,255,255,.22); }
 
     /* ── MAIN CONTENT ── */
     .page-content {
@@ -154,9 +127,9 @@
     .page-title {
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--navy);
       margin-bottom: 28px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
     /* ── TWO-COLUMN GRID ── */
@@ -177,12 +150,13 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px;
+      box-shadow: 0 1px 4px rgba(20,70,140,.05);
     }
 
     .card-title {
       font-size: 0.95rem;
       font-weight: 600;
-      color: var(--text-primary);
+      color: var(--navy);
       margin-bottom: 18px;
       display: flex;
       align-items: center;
@@ -192,7 +166,7 @@
     .card-title-dot {
       width: 8px; height: 8px;
       border-radius: 50%;
-      background: #6366f1;
+      background: var(--navy);
       flex-shrink: 0;
     }
 
@@ -205,13 +179,13 @@
 
     .users-table th {
       text-align: left;
-      color: var(--text-faint);
-      font-weight: 500;
+      color: var(--text-subtle);
+      font-weight: 600;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       padding: 0 0 10px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--border);
     }
 
     .users-table td {
@@ -222,6 +196,7 @@
     }
 
     .users-table tr:last-child td { border-bottom: none; }
+    .users-table tr:hover td { background: var(--bg-surface-2); }
     .users-table td.name { font-weight: 500; color: var(--text-secondary); }
     .users-table td.email { color: var(--text-faint); font-size: 0.8rem; }
 
@@ -229,11 +204,11 @@
       padding: 2px 9px;
       border-radius: 20px;
       font-size: 0.72rem;
-      font-weight: 500;
+      font-weight: 600;
       display: inline-block;
     }
-    .role-badge.admin   { background: #1e3a5f; color: #60a5fa; }
-    .role-badge.beperkt { background: #2d1f0e; color: #fb923c; }
+    .role-badge.admin   { background: #e4ecf7; color: var(--navy); }
+    .role-badge.beperkt { background: #fef3c7; color: var(--orange); }
 
     /* ── PROMPT EDITOR ── */
     .prompt-group { margin-bottom: 20px; }
@@ -255,7 +230,7 @@
       border: 1px solid var(--border-2);
       border-radius: 10px;
       color: var(--text-muted);
-      font-family: 'Inter', monospace;
+      font-family: 'Segoe UI', system-ui, monospace;
       font-size: 0.82rem;
       line-height: 1.6;
       padding: 12px 14px;
@@ -264,7 +239,7 @@
       transition: border-color 0.2s;
       outline: none;
     }
-    .prompt-textarea:focus { border-color: #6366f1; }
+    .prompt-textarea:focus { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(20,70,140,.12); }
 
     .save-row {
       margin-top: 20px;
@@ -274,18 +249,18 @@
     }
 
     .save-btn {
-      background: linear-gradient(135deg, #6366f1, #7c3aed);
+      background: var(--navy);
       color: white;
       border: none;
       border-radius: 8px;
       padding: 8px 22px;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       font-family: inherit;
       cursor: pointer;
-      transition: opacity 0.15s;
+      transition: background 0.15s;
     }
-    .save-btn:hover { opacity: 0.85; }
+    .save-btn:hover { background: var(--navydark); }
     .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
     .save-status {
@@ -294,8 +269,8 @@
       transition: opacity 0.3s;
     }
     .save-status.visible { opacity: 1; }
-    .save-status.ok  { color: #34d399; }
-    .save-status.err { color: #f87171; }
+    .save-status.ok  { color: var(--green); }
+    .save-status.err { color: var(--red); }
 
     /* ── TABS ── */
     .tab-bar {
@@ -319,8 +294,8 @@
       transition: all 0.15s;
       margin-bottom: -1px;
     }
-    .tab-btn:hover { color: var(--text-muted); }
-    .tab-btn.active { color: #818cf8; border-bottom-color: #6366f1; }
+    .tab-btn:hover { color: var(--navy); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
 
     /* ── DEPARTMENTS ── */
     .dept-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
@@ -329,7 +304,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg-base);
+      background: var(--bg-surface-2);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 12px 16px;
@@ -340,7 +315,7 @@
     .dept-row-actions { display: flex; gap: 8px; }
 
     .dept-action-btn {
-      background: var(--bg-surface-2);
+      background: var(--bg-surface);
       border: 1px solid var(--border-2);
       color: var(--text-subtle);
       padding: 4px 12px;
@@ -350,13 +325,13 @@
       font-family: inherit;
       transition: all 0.15s;
     }
-    .dept-action-btn:hover { background: var(--bg-surface-hover); color: var(--text-muted); }
-    .dept-action-btn.danger { border-color: #7f1d1d; color: #f87171; }
-    .dept-action-btn.danger:hover { background: #2d1515; }
+    .dept-action-btn:hover { background: var(--bg-surface-hover); color: var(--navy); border-color: var(--navy); }
+    .dept-action-btn.danger { border-color: rgba(220,38,38,.35); color: var(--red); }
+    .dept-action-btn.danger:hover { background: rgba(220,38,38,.08); border-color: var(--red); }
 
     .dept-editor {
-      background: var(--bg-base);
-      border: 1px solid #6366f1;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--navy);
       border-radius: 12px;
       padding: 18px;
       margin-bottom: 16px;
@@ -386,7 +361,7 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .dept-editor-input:focus { border-color: #6366f1; }
+    .dept-editor-input:focus { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(20,70,140,.12); }
 
     .dept-editor-textarea {
       width: 100%;
@@ -394,7 +369,7 @@
       border: 1px solid var(--border-2);
       border-radius: 8px;
       color: var(--text-muted);
-      font-family: 'Inter', monospace;
+      font-family: 'Segoe UI', system-ui, monospace;
       font-size: 0.82rem;
       line-height: 1.6;
       padding: 10px 12px;
@@ -403,9 +378,9 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    .dept-editor-textarea:focus { border-color: #6366f1; }
+    .dept-editor-textarea:focus { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(20,70,140,.12); }
 
-    .dept-editor-error { color: #f87171; font-size: 0.8rem; margin-top: 6px; display: none; }
+    .dept-editor-error { color: var(--red); font-size: 0.8rem; margin-top: 6px; display: none; }
     .dept-editor-error.visible { display: block; }
 
     .add-dept-btn {
@@ -420,33 +395,46 @@
       width: 100%;
       transition: all 0.15s;
     }
-    .add-dept-btn:hover { border-color: #6366f1; color: #818cf8; background: var(--bg-base); }
+    .add-dept-btn:hover { border-color: var(--navy); color: var(--navy); background: #e4ecf7; }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <img src="/static/logo.svg" alt="Helpdesk AI" style="width:32px;height:32px;border-radius:8px;">
-    <h1>Helpdesk AI</h1>
-    <span class="logo-sub">Admin</span>
+<div class="topbar">
+  <div class="topbar-logo">
+    <svg viewBox="3480 1145 2790 265" xmlns="http://www.w3.org/2000/svg" aria-label="Pollet Group" style="height:36px;width:auto;">
+      <style>.st0{fill:#FFFFFF;}</style>
+      <path class="st0" d="M4493.59,1331.69c0,0,13.66-15.18,15.78-20.33c-0.78-0.34-1.64-0.68-2.46-0.94c-35.99-12.92-102.68,14.02-106.32,18.22c5.01-11.56,37.23-46.68,42.62-52.81c-0.18-0.02-0.36-0.04-0.54-0.06c-0.56-0.06-1.1-0.1-1.72-0.16c-0.06-0.02-0.1-0.02-0.16-0.02c-46.92-3.32-165.26,50.67-154.79,45.46c9.61-16.8,64.61-66.03,67.57-71.66c-0.22-0.08-0.92-0.2-1.78-0.3c-1.38-0.18-2.76-0.4-4.15-0.56h-0.1c-104.86-12.16-210.48,85.65-202.61,75.18c16.48-28.2,91.06-100.03,99.07-109.05c-0.2-0.02-0.38-0.04-0.6-0.06c-110.89-12.08-230.47,78.5-242.16,87.74c22.79-70.71,194.08-165.34,200.07-170.23c-0.1-0.02-0.28-0.02-0.48-0.02c-372.62,7.95-447.14,212.92-447.14,212.92c132.94-152.54,350.17-173.29,361.6-175.47c-80.57,40.93-153.97,148.84-156.65,174.55c-1.38,13.36,6.89,12.38,12.94,8.25c0.28-0.2,7.21-5.89,10.13-8.25h-0.02c0.16-0.14,0.3-0.24,0.44-0.38c0.52-0.4,0.86-0.68,0.86-0.68v0.02c112.15-91.28,211.62-100.96,211.62-100.96s-23.93,23.09-41.7,41.7c-17.72,18.62-45.24,63-37.25,72.76c3.32,4.03,10.59,2.3,17.68-1.02c2.74-1.42,19.69-13.38,19.69-13.38h0.02c118.48-82.97,159.55-67.21,154.27-67.21l-44.36,47.92c0,0-13.32,20.37-7.99,26.56c2.12,2.48,6.91,2.28,11.6,1.2c1.46-0.38,4.97-1.62,12.9-5.45c1.26-0.58,2.48-1.2,3.72-1.78c0.1-0.04,0.2-0.08,0.3-0.14c64.09-30.8,116.96-41.72,116.96-41.72s-26.76,21.31-29.26,40.85c-3.16,24.57,19.51,11.5,19.51,11.5c26.92-20.21,65.19-20.83,72.84-21.61c-7.81,6.31-3.67,29.58-3.67,29.58s44.4-14.2,60.38-19.47c15.94-5.35,10.61,10.61,31.88,18.6c21.29,7.99,29.28-21.29,29.28-21.29C4560.14,1299.75,4493.59,1331.69,4493.59,1331.69"/>
+      <path class="st0" d="M4696.54,1169.5h69.9c34.95,0,60.15,23.57,60.15,59.88c0,36.31-25.2,60.69-60.15,60.69h-43.08v70.71h-26.82V1169.5z M4762.11,1266.77c23.03,0,37.12-14.36,37.12-37.39c0-23.03-14.09-36.58-36.85-36.58h-39.02v73.97H4762.11z"/>
+      <path class="st0" d="M4920.31,1220.44c40.91,0,73.96,30.08,73.96,71.53c0,41.73-33.06,72.07-73.96,72.07c-40.91,0-73.97-30.35-73.97-72.07C4846.34,1250.51,4879.4,1220.44,4920.31,1220.44z M4920.31,1341.28c26.01,0,47.14-20.59,47.14-49.31c0-28.45-21.13-48.77-47.14-48.77c-25.74,0-47.14,20.32-47.14,48.77C4873.17,1320.69,4894.57,1341.28,4920.31,1341.28z"/>
+      <path class="st0" d="M5024.6,1169.5h26.28v149.28c0,16.53,6.5,19.51,14.63,19.51c2.44,0,4.6-0.27,4.6-0.27v23.3c0,0-4.07,0.54-8.67,0.54c-14.9,0-36.85-4.07-36.85-38.47V1169.5z"/>
+      <path class="st0" d="M5097.2,1169.5h26.28v149.28c0,16.53,6.5,19.51,14.63,19.51c2.44,0,4.6-0.27,4.6-0.27v23.3c0,0-4.07,0.54-8.67,0.54c-14.9,0-36.85-4.07-36.85-38.47V1169.5z"/>
+      <path class="st0" d="M5230.5,1220.44c38.74,0,59.33,28.72,59.33,64.21c0,3.52-0.81,11.38-0.81,11.38h-99.98c1.35,30.07,22.76,45.24,47.14,45.24c23.57,0,40.64-15.98,40.64-15.98l10.84,19.24c0,0-20.32,19.51-53.11,19.51c-43.08,0-72.61-31.16-72.61-71.8C5161.95,1248.62,5191.48,1220.44,5230.5,1220.44z M5263.01,1276.25c-0.82-23.57-15.45-34.95-33.06-34.95c-20.05,0-36.3,12.46-40.1,34.95H5263.01z"/>
+      <path class="st0" d="M5328.29,1246.72h-17.88v-21.13h18.7v-39.56h25.47v39.56h33.06v21.13h-33.06v60.96c0,27.37,19.24,30.89,29.26,30.89c3.79,0,6.23-0.54,6.23-0.54v23.3c0,0-3.79,0.54-9.21,0.54c-17.61,0-52.56-5.42-52.56-51.21V1246.72z"/>
+      <path class="st0" d="M5581.05,1166.25c45.79,0,69.63,23.03,69.63,23.03l-13.55,20.05c0,0-21.4-18.7-53.91-18.7c-44.98,0-72.07,32.78-72.07,73.7c0,44.43,30.35,75.05,70.44,75.05c33.06,0,54.19-23.84,54.19-23.84v-27.64h-31.16v-23.3h55.54v96.18h-23.57v-11.92c0-4.07,0.27-8.13,0.27-8.13h-0.54c0,0-20.86,23.3-58.79,23.3c-51.48,0-94.02-40.64-94.02-99.16C5483.51,1209.6,5525.23,1166.25,5581.05,1166.25z"/>
+      <path class="st0" d="M5697.53,1223.69h25.47v23.84c0,5.69-0.54,10.29-0.54,10.29h0.54c6.23-20.05,22.22-35.76,43.35-35.76c3.52,0,6.78,0.54,6.78,0.54v26.01c0,0-3.52-0.81-7.59-0.81c-16.8,0-32.24,11.92-38.47,32.24c-2.44,7.86-3.25,16.25-3.25,24.65v56.08h-26.28V1223.69z"/>
+      <path class="st0" d="M5863.05,1220.44c40.91,0,73.96,30.08,73.96,71.53c0,41.73-33.05,72.07-73.96,72.07s-73.96-30.35-73.96-72.07C5789.09,1250.51,5822.14,1220.44,5863.05,1220.44z M5863.05,1341.28c26.01,0,47.14-20.59,47.14-49.31c0-28.45-21.13-48.77-47.14-48.77c-25.74,0-47.14,20.32-47.14,48.77C5815.91,1320.69,5837.31,1341.28,5863.05,1341.28z"/>
+      <path class="st0" d="M5967.07,1223.69h26.28v81.82c0,18.96,3.79,34.14,25.74,34.14c27.91,0,44.43-24.65,44.43-51.75v-64.21h26.28v137.09h-25.47v-18.15c0-5.69,0.54-10.03,0.54-10.03h-0.54c-5.69,13.55-23.57,31.43-50.4,31.43c-30.89,0-46.87-16.26-46.87-52.56V1223.69z"/>
+      <path class="st0" d="M6131.78,1223.69h24.12v11.65c0,5.42-0.54,10.03-0.54,10.03h0.54c0,0,11.65-24.93,46.06-24.93c36.85,0,60.15,29.26,60.15,71.8c0,43.62-26.28,71.8-62.05,71.8c-30.08,0-41.99-22.49-41.99-22.49h-0.54c0,0,0.54,4.87,0.54,11.92v61.5h-26.28V1223.69z M6195.99,1341.55c21.67,0,39.56-17.88,39.56-49.04c0-29.8-15.98-49.04-38.75-49.04c-20.59,0-39.55,14.36-39.55,49.31C6157.25,1317.16,6170.79,1341.55,6195.99,1341.55z"/>
+    </svg>
+    <div class="topbar-divider"></div>
+    <span class="topbar-title">Helpdesk AI</span>
+    <span class="topbar-sub">/ Admin</span>
   </div>
-  <div class="header-right">
+  <div class="topbar-right">
     <div class="user-avatar">{{ user.display_name[0] | upper }}</div>
     <span class="user-name">{{ user.display_name }}</span>
     <button class="theme-toggle-btn" onclick="toggleTheme()" title="Schakel thema"></button>
-    <a href="/admin/kb" class="back-btn">
+    <a href="/admin/kb" class="topbar-btn">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       KB Beheer
     </a>
-    <a href="/" class="back-btn">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
+    <a href="/" class="topbar-btn">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       Terug naar chat
     </a>
   </div>
-</header>
+</div>
 
 <div class="page-content">
   <div class="page-title">Beheer</div>
@@ -481,17 +469,17 @@
       </div>
 
       <!-- Security prompt -->
-      <div class="card" style="grid-column: 1 / -1; border-color: #7f1d1d;">
+      <div class="card" style="grid-column: 1 / -1; border-color: rgba(220,38,38,.4); border-left: 3px solid var(--red);">
         <div class="card-title">
-          <span class="card-title-dot" style="background:#ef4444;"></span>
+          <span class="card-title-dot" style="background:var(--red);"></span>
           Security prompt
           <span style="font-size:0.72rem;color:var(--text-faint);font-weight:400;margin-left:6px;">— wordt als eerste blok geladen, hoogste prioriteit</span>
         </div>
         <div class="prompt-group" style="margin-bottom:0;">
-          <textarea id="prompt-security" class="prompt-textarea" rows="10" style="border-color:#7f1d1d;">Laden...</textarea>
+          <textarea id="prompt-security" class="prompt-textarea" rows="10" style="border-color:rgba(220,38,38,.35);">Laden...</textarea>
         </div>
         <div class="save-row">
-          <button class="save-btn" id="save-security-btn" onclick="saveSecurity()" style="background:linear-gradient(135deg,#dc2626,#991b1b);">Opslaan</button>
+          <button class="save-btn" id="save-security-btn" onclick="saveSecurity()" style="background:var(--red);">Opslaan</button>
           <span class="save-status" id="save-security-status"></span>
         </div>
       </div>
@@ -550,9 +538,243 @@
           <span class="save-status" id="save-selectie-status"></span>
         </div>
       </div>
+
+      <!-- MCP tools overzicht -->
+      <div class="card" style="grid-column: 1 / -1; margin-top:20px;">
+        <div class="card-title">
+          <span class="card-title-dot" style="background:#0ea5e9;"></span>
+          MCP Tools — beschikbare commando's
+          <span style="font-size:0.72rem;color:var(--text-faint);font-weight:400;margin-left:6px;">— Claude gebruikt deze tools automatisch tijdens gesprekken</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;">
+
+          <!-- JIRA LEZEN -->
+          <div class="mcp-group">
+            <div class="mcp-group-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Jira — Lezen
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">get_open_tickets</div>
+              <div class="mcp-tool-desc">Haal open tickets op, optioneel gefilterd op project of zoekterm.</div>
+              <div class="mcp-params">
+                <span class="mcp-param opt">project</span>
+                <span class="mcp-param opt">query</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">get_ticket</div>
+              <div class="mcp-tool-desc">Volledige details van één ticket: beschrijving, status, commentaren, prioriteit.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">ticket_id</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">get_my_tickets</div>
+              <div class="mcp-tool-desc">Tickets toegewezen aan of aangemaakt door de ingelogde gebruiker.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">email</span>
+                <span class="mcp-param opt">project</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">get_resolved_tickets</div>
+              <div class="mcp-tool-desc">Opgeloste tickets voor historiekanalyse (status = Done).</div>
+              <div class="mcp-params">
+                <span class="mcp-param opt">project</span>
+                <span class="mcp-param opt">max_results</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">search_jira</div>
+              <div class="mcp-tool-desc">Zoek in opgeloste tickets — hoe zijn gelijkaardige problemen eerder opgelost?</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">query</span>
+                <span class="mcp-param opt">project</span>
+                <span class="mcp-param opt">max_results</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- JIRA SCHRIJVEN -->
+          <div class="mcp-group">
+            <div class="mcp-group-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Jira — Schrijven
+              <span class="mcp-confirm-badge">bevestiging vereist</span>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">create_ticket</div>
+              <div class="mcp-tool-desc">Maak een nieuw Jira ticket aan met type, beschrijving en locatie.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">summary</span>
+                <span class="mcp-param req">project</span>
+                <span class="mcp-param opt">description</span>
+                <span class="mcp-param opt">request_type</span>
+                <span class="mcp-param opt">reporter_email</span>
+                <span class="mcp-param opt">reporter_location</span>
+              </div>
+              <div style="margin-top:6px;font-size:0.72rem;color:var(--text-faint);">
+                Types: Infrastructure problem · Application problem · Request access · New employee · Request hardware · Security/Phished · AI questions · WMS problem · Domain transfer · Leaving user · Request change · Request Smartphone
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">assign_ticket</div>
+              <div class="mcp-tool-desc">Wijs een ticket toe aan een medewerker op naam of account ID.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">ticket_id</span>
+                <span class="mcp-param req">assignee</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">add_comment</div>
+              <div class="mcp-tool-desc">Voeg een comment toe aan een ticket (markdown ondersteund).</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">ticket_id</span>
+                <span class="mcp-param req">comment</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">update_status</div>
+              <div class="mcp-tool-desc">Verander de status van een ticket naar bijv. In Progress of Done.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">ticket_id</span>
+                <span class="mcp-param req">status</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONFLUENCE -->
+          <div class="mcp-group">
+            <div class="mcp-group-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Confluence — Kennisbank
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">search_confluence</div>
+              <div class="mcp-tool-desc">Zoek in de Confluence kennisbank op basis van een probleembeschrijving of zoekterm.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">query</span>
+              </div>
+            </div>
+            <div class="mcp-tool">
+              <div class="mcp-tool-name">create_confluence_page</div>
+              <div class="mcp-tool-desc">Publiceer een nieuw kennisartikel in Confluence na het oplossen van een ticket.</div>
+              <div class="mcp-params">
+                <span class="mcp-param req">title</span>
+                <span class="mcp-param req">content</span>
+                <span class="mcp-param req">space_key</span>
+              </div>
+              <span class="mcp-confirm-badge" style="display:inline-flex;margin-top:6px;">bevestiging vereist</span>
+            </div>
+
+            <!-- Legende -->
+            <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);">
+              <div style="font-size:0.72rem;font-weight:600;color:var(--text-subtle);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;">Legende</div>
+              <div style="display:flex;flex-direction:column;gap:5px;font-size:0.78rem;color:var(--text-faint);">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="mcp-param req">parameter</span>
+                  Verplicht veld
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="mcp-param opt">parameter</span>
+                  Optioneel veld
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="mcp-confirm-badge">bevestiging vereist</span>
+                  Gebruiker moet actie goedkeuren voor uitvoering
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+
+<style>
+  .mcp-group {
+    background: var(--bg-base);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mcp-group-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .mcp-confirm-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #fef3c7;
+    color: var(--orange);
+    border: 1px solid #fde68a;
+    border-radius: 20px;
+    padding: 1px 8px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-left: auto;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .mcp-tool {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .mcp-tool-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    margin-bottom: 3px;
+  }
+  .mcp-tool-desc {
+    font-size: 0.8rem;
+    color: var(--text-subtle);
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+  .mcp-params {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .mcp-param {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+  .mcp-param.req {
+    background: #e4ecf7;
+    color: var(--navy);
+    border: 1px solid var(--border-2);
+  }
+  .mcp-param.opt {
+    background: var(--bg-surface-2);
+    color: var(--text-subtle);
+    border: 1px solid var(--border);
+  }
+</style>
 
 <script>
 fetch('/api/security').then(r => r.text()).then(t => {
